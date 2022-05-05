@@ -36,16 +36,16 @@ function clearDdMenu(){
 	getDdMenu().innerHTML = "";
 }
 function enableLoadQuestionsButton(){
-	getLoadQuestionsButton().className = "btn btn-primary btn-sm";
+	getLoadQuestionsButton().className = "btn btn-primary btn-sm p-3 mt-2";
 }
 function disableLoadQuestionsButton(){
-	getLoadQuestionsButton().className = "btn btn-primary btn-sm disabled";
+	getLoadQuestionsButton().className = "btn btn-primary btn-sm disabled p-3 mt-2";
 }
 function disableChkAnsButton(){
-	document.getElementById("chkans").className = "btn btn-secondary btn-sm disabled";
+	document.getElementById("chkans").className = "btn btn-secondary btn-sm disabled p-3 mt-2";
 }
 function enableChkAnsButton(){
-	document.getElementById("chkans").className = "btn btn-primary btn-sm";
+	document.getElementById("chkans").className = "btn btn-primary btn-sm p-3 mt-2";
 }
 function clearAllQuestions(){
 	document.getElementById('questions').innerHTML = "";
@@ -76,6 +76,7 @@ function displayChoose(val){
 		
 		element.innerHTML = aText;
 		ddMenu.appendChild(element);
+		//$('#your-div-id').load('your-html-page.html');
 	}
 	
 	enableChooseMenu(val);
