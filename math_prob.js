@@ -83,6 +83,7 @@ function displayChoose(val){
 }
 
 function loadAdditionParams(chosenVal, arrVal){
+	clearAllQuestions();
 	this.chosenVal = chosenVal;
 	this.arrVal = arrVal;
 	for (i = 0; i < maxQ; i++) {
@@ -113,6 +114,7 @@ function loadAdditionParams(chosenVal, arrVal){
 	enableLoadQuestionsButton();
 }
 function loadSubtractionParams(chosenVal, arrVal){
+	clearAllQuestions();
 	reset();
 	this.chosenVal = chosenVal;
 	this.arrVal = arrVal;
@@ -147,6 +149,7 @@ function loadMultiplicationParams(chosenVal, arrVal){
 	getChooseMenu().innerHTML = "Multiply : " + divisionDisplay[arrVal];
 }
 function loadDivisionParams(chosenVal, arrVal){
+	clearAllQuestions();
 	reset();
 	this.chosenVal = chosenVal;
 	this.arrVal = arrVal;

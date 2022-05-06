@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<title>Fundamental Math Problems</title>
+		<!-- add icon link -->
+        <link rel="icon" href="icon.png" type="image/x-icon">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Bootstrap CSS -->
@@ -17,14 +19,13 @@
 		<script type="text/javascript" src="math_prob.js"></script>
 	</head>
 	<body>
-		<div class="p-5 bg-primary text-white rounded">
-		  <h1>Fundamental Math - Simple Addition/Subtraction/Multiplication/Division</h1>
-		  <p>-- MOHIT RODEY.</p>
+		<div class="container-fluid p-4 bg-primary text-white">
+			<div class="p-4 bg-primary text-white rounded">
+				<h1>Fundamental Math - Simple Addition, Subtraction, Multiplication & Division</h1>
+				<p>-- With Concepts</p>
+			</div>
 		</div>
 		
-		<div class="row bg-primary text-white">
-			<p id="output" class="text-center"></p>
-		</div>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
 				<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -45,19 +46,38 @@
 				</div>
 			</div>
 		</nav>
-		<div class="dropdown bg-dark text-white p-3">
-		  <button type="button"  id="choose" class="btn btn-primary dropdown-toggle disabled" data-bs-toggle="dropdown">Choose :</button>
-		  <ul class="dropdown-menu" id="ddMenu"></ul>
+		<div class="container-fluid navbar-expand-lg navbar-dark bg-dark">
+			
+			<div class="dropdown bg-dark text-white p-3">
+			  <button type="button"  id="choose" class="btn btn-primary dropdown-toggle disabled" data-bs-toggle="dropdown">Choose :</button>
+			  <ul class="dropdown-menu" id="ddMenu"></ul>
+			</div>
+				<div class="row bg-dark text-white">
+				<p id="output" class="text-center"></p>
+			</div>
+			
+			<form class="bg-dark text-white p-3">
+				<ul id="questions"></ul>
+			</form>
+			<div id="resultDiv"></div>
+			<div>
+				<button type="button" id="lqst" class="btn btn-primary btn-sm disabled p-3 mt-2" onclick="loadData()">Load Questions & Start Test</button>
+				<button type="button" id="chkans" class="btn btn-secondary btn-sm disabled p-3 mt-2" onclick="checkAns()">Check Answers</button>
+				<button type="button" id="clr" class="btn btn-primary btn-sm p-3 mt-2" onclick="reload()"><i class="bi bi-arrow-repeat"></i> Clear</button>
+			</div>
+			<hr>
+			<footer>
+				<div class="row bg-dark text-white">
+					<div class="col-md-6">
+						<p>Copyright &copy; 2022 MOHIT RODEY</p>
+					</div>
+					<div class="col-md-6 text-md-end">
+						<a href="#" class="text-white">Terms of Use</a> 
+						<span class="text-muted mx-2">|</span> 
+						<a href="#" class="text-white">Privacy Policy</a>
+					</div>
+				</div>
+			</footer>
 		</div>
-		<form class="bg-dark text-white p-3">
-			<ul id="questions"></ul>
-		</form>
-		<div id="resultDiv"></div>
-		<div>
-			<button type="button" id="lqst" class="btn btn-primary btn-sm disabled p-3 mt-2" onclick="loadData()">Load Questions & Start Test</button>
-			<button type="button" id="chkans" class="btn btn-secondary btn-sm disabled p-3 mt-2" onclick="checkAns()">Check Answers</button>
-			<button type="button" id="clr" class="btn btn-primary btn-sm p-3 mt-2" onclick="reload()"><i class="bi bi-arrow-repeat"></i> Clear</button>
-		</div>
-		<BR>
 	</body>
 </html>
