@@ -1,2 +1,2 @@
 # MathProblems
-math Problem Support JS file
+Math Problem Support Files
