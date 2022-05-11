@@ -1,5 +1,6 @@
 {
 	"years": [
+		"Year 1",
 		"Year 5"
 	],
 	"commonDisplay": [
@@ -18,9 +19,9 @@
 	],
 	"multiplicationDisplay": [
 		"Single Digit",
-		"2 Digit By 1 Digit",
+		"1 Digit By 2 Digit",
 		"2 Digit",
-		"3 Digit By 2 Digit",
+		"2 Digit By 3 Digit",
 		"3 Digit"
 	]
 }

@@ -1,8 +1,6 @@
 var maxQ = 10;
 var num1 = Array(maxQ).fill(0);
 var num2 = Array(maxQ).fill(0);
-var commonDisplay = ["Single Digit","1 Digit With 2 Digit","2 Digit","2 Digit With 3 Digit","3 Digit"];
-var divisionDisplay = ["Single Digit","2 Digit By 1 Digit","2 Digit","3 Digit By 2 Digit","3 Digit"];
 var time = 0;
 var running = 0;
 var chosenVal = 0;
@@ -70,7 +68,7 @@ function enableChooseMenu(val){
 
 function clearDdMenu(){
 	$('#ddMenu').empty();
-	$('#choose').html("Choose :").addClass("btn btn-secondary dropdown-toggle disabled");
+	$('#choose').html("Choose Option:").addClass("btn btn-secondary dropdown-toggle disabled");
 }
 
 function enableLoadQuestionsButton(){
@@ -106,11 +104,10 @@ function resetAllParams(){
 
 
 function loadChooseYrMenu(){
-	//$.each(data, function (index, value) {
-		$('#yrMenu').append('<li><a class=\"dropdown-item\">'+_data.years+'</a></li>');
-		//return false;
-	//});
-	
+	$.each(_data.years,function(index, name){
+		let str = name.replace(" ","");
+		$('#yrMenu').append('<li class=\"btn-outline-warning\"><a class=\"dropdown-item btn-outline-warning\" onClick=\"alert(\''+str+'\')\">'+name+'</a></li>');
+	});
 }
 
 function displayChoose(val){
@@ -118,16 +115,15 @@ function displayChoose(val){
 	let ddMenu = getDdMenu();
 	for(i=0;i<5;i++){
 		if(val == "Division"){
-			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadDivisionParams(4,"+i+");\">"+divisionDisplay[i]+"</a></li>");
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadDivisionParams(4,"+i+");\">"+_data.divisionDisplay[i]+"</a></li>");
 		} else if(val == "Addition"){
-			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadAdditionParams(1,"+i+");\">"+commonDisplay[i]+"</a></li>");
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadAdditionParams(1,"+i+");\">"+_data.commonDisplay[i]+"</a></li>");
 		} else if(val == "Subtraction"){
-			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadSubtractionParams(2,"+i+");\">"+divisionDisplay[i]+"</a></li>");
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadSubtractionParams(2,"+i+");\">"+_data.divisionDisplay[i]+"</a></li>");
 		} else if(val == "Multiplication"){
-			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadMultiplicationParams(3,"+i+");\">"+commonDisplay[i]+"</a></li>");
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadMultiplicationParams(3,"+i+");\">"+_data.multiplicationDisplay[i]+"</a></li>");
 		}
 	}
-	
 	enableChooseMenu(val);
 }
 
@@ -159,7 +155,7 @@ function loadAdditionParams(chosenVal, arrVal){
 		}
 	}
 	reset();
-	getChooseMenu().prop("innerHTML", "Add : " + commonDisplay[arrVal]);
+	getChooseMenu().prop("innerHTML", "Add : " + _data.commonDisplay[arrVal]);
 	enableLoadQuestionsButton();
 }
 function loadSubtractionParams(chosenVal, arrVal){
@@ -191,12 +187,12 @@ function loadSubtractionParams(chosenVal, arrVal){
 			num2[i] = getRandomInt(100,num1[i]);
 		}
 	}
-	getChooseMenu().prop("innerHTML", "Subtract : " + divisionDisplay[arrVal]);
+	getChooseMenu().prop("innerHTML", "Subtract : " + _data.divisionDisplay[arrVal]);
 	enableLoadQuestionsButton();
 }
 function loadMultiplicationParams(chosenVal, arrVal){
 	loadAdditionParams(chosenVal, arrVal);
-	getChooseMenu().prop("innerHTML", "Multiply : " + divisionDisplay[arrVal]);
+	getChooseMenu().prop("innerHTML", "Multiply : " + _data.multiplicationDisplay[arrVal]);
 }
 function loadDivisionParams(chosenVal, arrVal){
 	clearAllQuestions();
@@ -227,7 +223,7 @@ function loadDivisionParams(chosenVal, arrVal){
 			num2[i] = getRandomInt(100,num1[i]);
 		}
 	}
-	getChooseMenu().prop("innerHTML", "Divide : " + divisionDisplay[arrVal]);
+	getChooseMenu().prop("innerHTML", "Divide : " + _data.divisionDisplay[arrVal]);
 	enableLoadQuestionsButton();
 }
 
