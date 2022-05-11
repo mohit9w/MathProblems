@@ -7,76 +7,125 @@ var time = 0;
 var running = 0;
 var chosenVal = 0;
 var arrVal = 0;
+let _data;
+
+// Shorthand for $( document ).ready()
+$(function() {
+    //console.log( $('[data-bs-toggle="tooltip"]') );
+	loadAllMenuData();
+	hideConceptDiv();
+	enableAllTooltips();
+});
 
 function reload(){
-	location.reload();
+	//location.reload();
+	resetAllParams();
 }
 function getDdMenu(){
-	return document.getElementById('ddMenu');
+	return $('#ddMenu');
 }
 function getChooseMenu(){
-	return document.getElementById('choose');
+	return $('#choose');
 }
 function getLoadQuestionsButton(){
-	return document.getElementById('lqst');
+	return $('#lqst');
 }
 function getResultDiv(){
-	return document.getElementById("resultDiv");
+	return $("#resultDiv");
 }
+function hideConceptDiv(){
+	$('#conceptDiv').hide();
+}
+function showConceptDiv(){
+	$('#conceptDiv').show();
+}
+
+function enableAllTooltips(){
+	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {  return new bootstrap.Tooltip(tooltipTriggerEl) });	
+	$('[data-bs-toggle="tooltip"]').prop("style", "pointer-events:auto");
+}
+
+function loadAllMenuData(){
+	let url = "MenuItems.json";
+	$.getJSON(url, function (data) {
+		_data = data;
+		loadChooseYrMenu(_data);
+    });
+}
+
 function setResult(className, resultText){
-	getResultDiv().className = className;
-	getResultDiv().innerHTML = "<strong>" + resultText + "</strong>";
-	getResultDiv().style.display = "block";
+	
+	let divPointer = getResultDiv();
+	divPointer.prop("className", className);
+	divPointer.prop("innerHTML", "<strong>" + resultText + "</strong>");
+	divPointer.prop("style", "display:block");
 }
+
 function enableChooseMenu(val){
-	getChooseMenu().innerHTML = "Choose " + val + " Type :";
-	getChooseMenu().className = "btn btn-primary dropdown-toggle";
+	let divPointer = getChooseMenu();
+	divPointer.prop("className", "btn btn-primary dropdown-toggle");
+	divPointer.prop("innerHTML", "Choose " + val + " Type :");
 }
+
 function clearDdMenu(){
-	getDdMenu().innerHTML = "";
+	$('#ddMenu').empty();
+	$('#choose').html("Choose :").addClass("btn btn-secondary dropdown-toggle disabled");
 }
+
 function enableLoadQuestionsButton(){
-	getLoadQuestionsButton().className = "btn btn-primary btn-sm p-3 mt-2";
+	getLoadQuestionsButton().prop("className", "btn btn-primary btn-sm p-3 mt-2");
 }
+
 function disableLoadQuestionsButton(){
-	getLoadQuestionsButton().className = "btn btn-primary btn-sm disabled p-3 mt-2";
+	getLoadQuestionsButton().prop("className", "btn btn-primary btn-sm disabled p-3 mt-2");
 }
+
 function disableChkAnsButton(){
-	document.getElementById("chkans").className = "btn btn-secondary btn-sm disabled p-3 mt-2";
+	$('#chkans').prop("className", "btn btn-secondary btn-sm disabled p-3 mt-2");
 }
+
 function enableChkAnsButton(){
-	document.getElementById("chkans").className = "btn btn-primary btn-sm p-3 mt-2";
+	$("#chkans").prop("className", "btn btn-primary btn-sm p-3 mt-2");
 }
+
 function clearAllQuestions(){
-	document.getElementById('questions').innerHTML = "";
+	$('#questions').prop("innerHTML", "");
 }
 
 function resetAllParams(){
+	hideConceptDiv();
 	clearDdMenu();
 	reset();
 	hideResult();
 	clearAllQuestions();
+	$('#lqst').addClass("btn btn-secondary dropdown-toggle disabled");
+	$('#chkans').addClass("btn btn-secondary dropdown-toggle disabled");
+	$("#output").html("");
+}
+
+
+function loadChooseYrMenu(){
+	//$.each(data, function (index, value) {
+		$('#yrMenu').append('<li><a class=\"dropdown-item\">'+_data.years+'</a></li>');
+		//return false;
+	//});
+	
 }
 
 function displayChoose(val){
 	resetAllParams();
 	let ddMenu = getDdMenu();
 	for(i=0;i<5;i++){
-		let element = document.createElement("li");
-		let aText = "";
 		if(val == "Division"){
-			aText = "<a class=\"dropdown-item\" onClick=\"loadDivisionParams(4,"+i+");\">"+divisionDisplay[i]+"</a></li>";
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadDivisionParams(4,"+i+");\">"+divisionDisplay[i]+"</a></li>");
 		} else if(val == "Addition"){
-			aText = "<a class=\"dropdown-item\" onClick=\"loadAdditionParams(1,"+i+");\">"+commonDisplay[i]+"</a></li>";
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadAdditionParams(1,"+i+");\">"+commonDisplay[i]+"</a></li>");
 		} else if(val == "Subtraction"){
-			aText = "<a class=\"dropdown-item\" onClick=\"loadSubtractionParams(2,"+i+");\">"+divisionDisplay[i]+"</a></li>";
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadSubtractionParams(2,"+i+");\">"+divisionDisplay[i]+"</a></li>");
 		} else if(val == "Multiplication"){
-			aText = "<a class=\"dropdown-item\" onClick=\"loadMultiplicationParams(3,"+i+");\">"+commonDisplay[i]+"</a></li>";
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadMultiplicationParams(3,"+i+");\">"+commonDisplay[i]+"</a></li>");
 		}
-		
-		element.innerHTML = aText;
-		ddMenu.appendChild(element);
-		//$('#your-div-id').load('your-html-page.html');
 	}
 	
 	enableChooseMenu(val);
@@ -110,11 +159,12 @@ function loadAdditionParams(chosenVal, arrVal){
 		}
 	}
 	reset();
-	getChooseMenu().innerHTML = "Add : " + commonDisplay[arrVal];
+	getChooseMenu().prop("innerHTML", "Add : " + commonDisplay[arrVal]);
 	enableLoadQuestionsButton();
 }
 function loadSubtractionParams(chosenVal, arrVal){
 	clearAllQuestions();
+	showConceptDiv();
 	reset();
 	this.chosenVal = chosenVal;
 	this.arrVal = arrVal;
@@ -141,12 +191,12 @@ function loadSubtractionParams(chosenVal, arrVal){
 			num2[i] = getRandomInt(100,num1[i]);
 		}
 	}
-	getChooseMenu().innerHTML = "Subtract : " + divisionDisplay[arrVal];
+	getChooseMenu().prop("innerHTML", "Subtract : " + divisionDisplay[arrVal]);
 	enableLoadQuestionsButton();
 }
 function loadMultiplicationParams(chosenVal, arrVal){
 	loadAdditionParams(chosenVal, arrVal);
-	getChooseMenu().innerHTML = "Multiply : " + divisionDisplay[arrVal];
+	getChooseMenu().prop("innerHTML", "Multiply : " + divisionDisplay[arrVal]);
 }
 function loadDivisionParams(chosenVal, arrVal){
 	clearAllQuestions();
@@ -177,7 +227,7 @@ function loadDivisionParams(chosenVal, arrVal){
 			num2[i] = getRandomInt(100,num1[i]);
 		}
 	}
-	getChooseMenu().innerHTML = "Divide : " + divisionDisplay[arrVal];
+	getChooseMenu().prop("innerHTML", "Divide : " + divisionDisplay[arrVal]);
 	enableLoadQuestionsButton();
 }
 
@@ -216,18 +266,18 @@ function checkAns() {
     for (i = 0; i < maxQ; i++) {
 		let result = getResult(i);
         var elementId = i + 1;
-        if (document.getElementById("Q" + elementId).value.length != 0) {
-            let value = parseInt(document.getElementById("Q" + elementId).value);
+        if ($("#Q" + elementId).val().length != 0) {
+            let value = parseInt($("#Q" + elementId).val());
             if (value == result) {
-                document.getElementById("sp" + elementId).innerHTML = "&#x2714;";
+                $("#sp" + elementId).prop("innerHTML", "&#x2714;");
                 correct = correct + 1;
             } else {
-                document.getElementById("sp" + elementId).innerHTML = "&#x2716;";
-				document.getElementById("correctAns" + elementId).innerHTML = "&nbsp;Correct Answer is: " + result;
+                $("#sp" + elementId).prop("innerHTML", "&#x2716;");
+				$("#correctAns" + elementId).prop("innerHTML", "&nbsp;Correct Answer is: " + result);
             }
         } else {
-            document.getElementById("sp" + elementId).innerHTML = "&#x2718;";
-			document.getElementById("correctAns" + elementId).innerHTML = "<font color=\"red\">&nbsp;Correct Answer is: " + result + "</font>";
+            $("#sp" + elementId).prop("innerHTML", "&#x2718;");
+			$("#correctAns" + elementId).prop("innerHTML", "<font color=\"red\">&nbsp;Correct Answer is: " + result + "</font>");
         }
     }
     if (correct == maxQ) {
@@ -269,7 +319,7 @@ function showResult(res, resultText) {
 	}
 }
 function hideResult() {
-    var x = getResultDiv().style.display = "none";
+    var x = $("#resultDiv").hide();
 }
 
 function startPause() {
@@ -284,7 +334,7 @@ function startPause() {
 function reset() {
     running = 0;
     time = 0;
-    document.getElementById("output").innerHTML = "00:00:00";
+    $("#output").html("00:00:00");
 }
 
 function increment() {
@@ -300,7 +350,7 @@ function increment() {
             if (secs < 10) {
                 secs = "0" + secs;
             }
-            document.getElementById("output").innerHTML = "<i class=\"fa fa-clock-o\"></i> " + mins + ":" + secs + ":" + "0" + tenths;
+            $("#output").prop("innerHTML", "<i class=\"fa fa-clock-o\"></i> " + mins + ":" + secs + ":" + "0" + tenths);
             increment();
         }, 100);
     }

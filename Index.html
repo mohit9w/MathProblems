@@ -7,13 +7,15 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Bootstrap CSS -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-		<!-- Bootstrap JS Bundle with Popper -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<!-- JQuery Inclusion -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.1/jquery-ui.js"></script>-->
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<!-- Bootstrap JS Bundle -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 		<!-- Local javascript -->
 		<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/mohit9w/MathProblems@main/math_prob.js"></script>-->
 		<script type="text/javascript" src="math_prob.js"></script>
@@ -24,6 +26,12 @@
 				<h1>Fundamental Math - Simple Addition, Subtraction, Multiplication & Division</h1>
 				<p>-- With Concepts</p>
 			</div>
+			<div class="row bg-primary text-white">
+				<div class="dropdown bg-primary text-white p-3">
+				  <button type="button"  id="chooseYr" class="btn btn btn-outline-warning dropdown-toggle" data-bs-toggle="dropdown">Choose Year:</button>
+				  <ul class="dropdown-menu" id="yrMenu"></ul>
+				</div>
+			</div>
 		</div>
 		
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,14 +40,14 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarCollapse">
-					<div class="navbar-nav">
+					<div class="navbar-nav p-3">
 						<button type="button" class="btn btn-outline-warning" onclick="displayChoose('Addition');">&nbsp;&nbsp;Addition&nbsp;&nbsp;</button> &nbsp;
 						<button type="button" class="btn btn-outline-warning" onclick="displayChoose('Subtraction');">&nbsp;Subtraction&nbsp;&nbsp;</button> &nbsp;
 						<button type="button" class="btn btn-outline-warning" onclick="displayChoose('Multiplication');">Multiplication</button> &nbsp;
 						<button type="button" class="btn btn-outline-warning" onclick="displayChoose('Division');">&nbsp;&nbsp;&nbsp;Division&nbsp;&nbsp;&nbsp;</button> &nbsp;
-						<button type="button" class="btn btn-outline-warning disabled" onclick="displayChoose('Trick');">Tricky Questions</button> &nbsp;
+						<button type="button" class="btn btn-outline-warning disabled" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Construction In Progress!!" onclick="displayChoose('Trick');">Tricky Questions</button> &nbsp;
 					</div>
-					<!--<div class="navbar-nav ms-auto">              	
+					<!--<div class="navbar-nav ms-auto">
 						<a href="#" class="nav-item nav-link">Login</a>
 						<a href="#" class="nav-item nav-link">Register</a>
 					</div>-->
@@ -51,13 +59,21 @@
 			<div class="row bg-dark text-white">
 				<div class="col-sm-2">
 					<div class="dropdown bg-dark text-white p-3">
-					  <button type="button"  id="choose" class="btn btn-primary dropdown-toggle disabled" data-bs-toggle="dropdown">Choose :</button>
+					  <button type="button"  id="choose" class="btn btn-secondary dropdown-toggle disabled" data-bs-toggle="dropdown">Choose :</button>
 					  <ul class="dropdown-menu" id="ddMenu"></ul>
 					</div>				
 				</div>
 				<div class="col-sm-1">
 					<div class="row bg-dark text-white mt-4">
 						<p id="output" class="text-center"></p>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="row bg-dark text-white mt-4">
+						<!-- 4:3 aspect ratio -->
+						<div id="conceptDiv" class="embed-responsive embed-responsive-4by3">
+						  <!--<iframe id="explainConcept" class="embed-responsive-item" src="..." allowfullscreen></iframe>-->
+						</div>						
 					</div>
 				</div>
 			</div>			
@@ -67,7 +83,7 @@
 			</form>
 			<div id="resultDiv"></div>
 			<div>
-				<button type="button" id="lqst" class="btn btn-primary btn-sm disabled p-3 mt-2" onclick="loadData()">Load Questions & Start Test</button>
+				<button type="button" id="lqst" class="btn btn-secondary btn-sm disabled p-3 mt-2" onclick="loadData()">Load Questions & Start Test</button>
 				<button type="button" id="chkans" class="btn btn-secondary btn-sm disabled p-3 mt-2" onclick="checkAns()">Check Answers</button>
 				<button type="button" id="clr" class="btn btn-primary btn-sm p-3 mt-2" onclick="reload()"><i class="bi bi-arrow-repeat"></i> Clear</button>
 			</div>
