@@ -1,1 +1,39 @@
-
+{
+	"Math": [
+		{
+			"name": "&nbsp;&nbsp;Addition&nbsp;&nbsp;",
+			"clickFunc": "displayChoose('Addition');",
+			"enabled": true,
+			"type": "Button",
+			"addTo": "#navBtns"
+		},
+		{
+			"name": "&nbsp;Subtraction&nbsp;&nbsp;",
+			"clickFunc": "displayChoose('Subtraction');",
+			"enabled": true,
+			"type": "Button",
+			"addTo": "#navBtns"
+		},
+		{
+			"name": "Multiplication",
+			"clickFunc": "displayChoose('Multiplication');",
+			"enabled": true,
+			"type": "Button",
+			"addTo": "#navBtns"
+		},
+		{
+			"name": "&nbsp;&nbsp;&nbsp;Division&nbsp;&nbsp;&nbsp;",
+			"clickFunc": "displayChoose('Division');",
+			"enabled": true,
+			"type": "Button",
+			"addTo": "#navBtns"
+		},
+		{
+			"name": "Tricky Questions",
+			"clickFunc": "displayChoose('Trick');",
+			"enabled": false,
+			"type": "Button",
+			"addTo": "#navBtns"
+		}
+	]
+}
