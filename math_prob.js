@@ -11,6 +11,16 @@ var _selectedYr;
 var _AllLoadedYrs = [];
 var jsonMap = {};
 
+function resetAll(){
+	$('#chooseSub').prop("className", "btn btn-outline-warning dropdown-toggle disabled");
+	$('#chooseSub').html("Choose Subject:");
+	$('#yearData').empty();
+	$('#navBtns').empty();
+	//if(_selectedYr != null && _selectedYr != 'undefined'){
+		//reload();
+	//}
+}
+
 // Shorthand for $( document ).ready()
 $(function() {
     //console.log( $('[data-bs-toggle="tooltip"]') );
@@ -38,6 +48,7 @@ function loadChooseYrMenu(){
 }
 
 function saveYr(year){
+	resetAll();
 	_selectedYr = year.replace(" ", "");
 	$('#chooseYr').prop("innerHTML", year);
 	populateSubjectMenu();
