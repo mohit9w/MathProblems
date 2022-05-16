@@ -1,17 +1,15 @@
-//var year5Jsfile;
+var arrVal = 0;
+var chosenVal = 0;
 // Shorthand for $( document ).ready()
 $(function() {
-	//$.getJSON("/Year5/Year5.js", function (data) {
-		//year5Jsfile = data;
-		populateYear5NavItems();
-    //});
+	populateYear5NavItems();
 	hideConceptDiv();
-	
 });
 
 function populateYear5NavItems(){
 	$('#navBtns').empty();//clear before populating new items.
-	let navBtnData = jsonMap[_selectedYr];
+	$('#navigationMenu').show();
+	let navBtnData = fetchJSONObject(_selectedYr);
 	$.each(navBtnData,function(key, value){
 		//console.log(JSON.parse(JSON.stringify(key)));
 		$.each(value,function(index, json){
@@ -105,13 +103,13 @@ function displayChoose(val){
 	let ddMenu = getDdMenu();
 	for(i=0;i<5;i++){
 		if(val == "Division"){
-			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadDivisionParams(4,"+i+");\">"+_data.divisionDisplay[i]+"</a></li>");
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadDivisionParams(4,"+i+");\">"+fetchJSONObject(landingMenuLabel).divisionDisplay[i]+"</a></li>");
 		} else if(val == "Addition"){
-			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadAdditionParams(1,"+i+");\">"+_data.commonDisplay[i]+"</a></li>");
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadAdditionParams(1,"+i+");\">"+fetchJSONObject(landingMenuLabel).commonDisplay[i]+"</a></li>");
 		} else if(val == "Subtraction"){
-			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadSubtractionParams(2,"+i+");\">"+_data.divisionDisplay[i]+"</a></li>");
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadSubtractionParams(2,"+i+");\">"+fetchJSONObject(landingMenuLabel).divisionDisplay[i]+"</a></li>");
 		} else if(val == "Multiplication"){
-			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadMultiplicationParams(3,"+i+");\">"+_data.multiplicationDisplay[i]+"</a></li>");
+			ddMenu.append("<a class=\"dropdown-item\" onClick=\"loadMultiplicationParams(3,"+i+");\">"+fetchJSONObject(landingMenuLabel).multiplicationDisplay[i]+"</a></li>");
 		}
 	}
 	enableChooseMenu(val);
@@ -146,7 +144,7 @@ function loadAdditionParams(chosenVal, arrVal){
 		}
 	}
 	reset();
-	getChooseMenu().prop("innerHTML", "Add : " + _data.commonDisplay[arrVal]);
+	getChooseMenu().prop("innerHTML", "Add : " + fetchJSONObject(landingMenuLabel).commonDisplay[arrVal]);
 	enableLoadQuestionsButton();
 }
 function loadSubtractionParams(chosenVal, arrVal){
@@ -179,12 +177,12 @@ function loadSubtractionParams(chosenVal, arrVal){
 			num2[i] = getRandomInt(100,num1[i]);
 		}
 	}
-	getChooseMenu().prop("innerHTML", "Subtract : " + _data.divisionDisplay[arrVal]);
+	getChooseMenu().prop("innerHTML", "Subtract : " + fetchJSONObject(landingMenuLabel).divisionDisplay[arrVal]);
 	enableLoadQuestionsButton();
 }
 function loadMultiplicationParams(chosenVal, arrVal){
 	loadAdditionParams(chosenVal, arrVal);
-	getChooseMenu().prop("innerHTML", "Multiply : " + _data.multiplicationDisplay[arrVal]);
+	getChooseMenu().prop("innerHTML", "Multiply : " + fetchJSONObject(landingMenuLabel).multiplicationDisplay[arrVal]);
 }
 function loadDivisionParams(chosenVal, arrVal){
 	clearAllQuestions();
@@ -216,7 +214,7 @@ function loadDivisionParams(chosenVal, arrVal){
 			num2[i] = getRandomInt(100,num1[i]);
 		}
 	}
-	getChooseMenu().prop("innerHTML", "Divide : " + _data.divisionDisplay[arrVal]);
+	getChooseMenu().prop("innerHTML", "Divide : " + fetchJSONObject(landingMenuLabel).divisionDisplay[arrVal]);
 	enableLoadQuestionsButton();
 }
 
@@ -254,10 +252,12 @@ function checkAns() {
     let correct = 0;
     for (i = 0; i < maxQ; i++) {
 		let result = getResult(i);
+		debugger;
         var elementId = i + 1;
         if ($("#Q" + elementId).val().length != 0) {
-            let value = parseInt($("#Q" + elementId).val());
-            if (value == result) {
+            //let value = parseInt($("#Q" + elementId).val());
+            let value = $("#Q" + elementId).val();
+            if (parseFloat(value).toFixed(2) == parseFloat(result).toFixed(2)) {
                 $("#sp" + elementId).prop("innerHTML", "&#x2714;");
                 correct = correct + 1;
             } else {
@@ -296,8 +296,6 @@ function getResult(i){
 	}
 }
 
-
-
 function showResult(res, resultText) {
 	if(res == 100){
 		setResult("alert alert-success", resultText);
@@ -309,38 +307,4 @@ function showResult(res, resultText) {
 }
 function hideResult() {
     var x = $("#resultDiv").hide();
-}
-
-function startPause() {
-    if (running == 0) {
-        running = 1;
-        increment();
-    } else {
-        running = 0;
-    }
-}
-
-function reset() {
-    running = 0;
-    time = 0;
-    $("#output").html("00:00:00");
-}
-
-function increment() {
-    if (running == 1) {
-        setTimeout(function () {
-            time++;
-            var mins = Math.floor(time / 10 / 60);
-            var secs = Math.floor(time / 10 % 60);
-            var tenths = time % 10;
-            if (mins < 10) {
-                mins = "0" + mins;
-            }
-            if (secs < 10) {
-                secs = "0" + secs;
-            }
-            $("#output").prop("innerHTML", "<i class=\"fa fa-clock-o\"></i> " + mins + ":" + secs + ":" + "0" + tenths);
-            increment();
-        }, 100);
-    }
 }
