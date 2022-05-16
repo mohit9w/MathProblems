@@ -59,19 +59,28 @@ function saveYr(year){
 function populateSubjectMenu(){
 	let filePath = "/" + _selectedYr + "/";
 	let jsonFile = _selectedYr + ".json";
-	if(jsonMap[_selectedYr] == null || jsonMap[_selectedYr] == 'undefined'){
+	if( jsonMap[_selectedYr] == null || jsonMap[_selectedYr] == 'undefined' || jsonMap[_selectedYr].length ==0 ){
 		$.getJSON(filePath + jsonFile, function (data) {
 			jsonMap[_selectedYr] = data;
 			loadSubjectMenu();
 		});
+	} else{
+	    loadSubjectMenu();
 	}
 }
 
 function loadSubjectMenu(){
+    let classNameUpdated = 0;
+    $('#subMenu').empty();
 	$.each(Object.keys(jsonMap[_selectedYr]),function(index, name){
-		$('#subMenu').append('<li class=\"btn-outline-warning\"><a class=\"dropdown-item btn-outline-warning\" onClick=\"loadYearAndSubject(\''+name+'\')\">'+name+'</a></li>');
+		if(name != null || name != 'undefined'){
+		    $('#subMenu').append('<li class=\"btn-outline-warning\"><a class=\"dropdown-item btn-outline-warning\" onClick=\"loadYearAndSubject(\''+name+'\')\">'+name+'</a></li>');
+            if(classNameUpdated == 0){
+                $('#chooseSub').prop("className", "btn btn-outline-warning dropdown-toggle");
+                classNameUpdated = 1;
+            }
+		}
 	});
-	$('#chooseSub').prop("className", "btn btn-outline-warning dropdown-toggle");
 }
 
 function loadYearAndSubject(subject){

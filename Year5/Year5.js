@@ -19,7 +19,7 @@ function populateYear5NavItems(){
 			if(json.enabled == true){
 				$(json.addTo).append('<button type=\"button\" class=\"btn btn-outline-warning\" onClick=\"' + json.clickFunc + '\">' + json.name + '</button> &nbsp;');
 			} else{
-				$(json.addTo).append('<button type=\"button\" class=\"btn btn-outline-warning disabled\" data-bs-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"WORK In Progress !!\" onClick=\"'+ json.clickFunc +'\">' + json.name + '</button> &nbsp;');
+				$(json.addTo).append('<button type=\"button\" class=\"btn btn-outline-warning disabled\" data-bs-toggle=\"tooltip\" data-bs-placement=\"bottom\" title=\"WORK In Progress !!\">' + json.name + '</button> &nbsp;');
 			}
 		});
 	});
