@@ -230,7 +230,7 @@ function loadDivisionParams(chosenVal, arrVal){
 			//3 Digit By 2 Digit
 			num1[i] = getRandomInt(100,999);
 			num2[i] = getRandomInt(10,99);
-		} else if(arrVal == 4){
+		} else if(arrVal == 5){
 			//3 Digit By 3 Digit
 			num1[i] = getRandomInt(100,999);
 			num2[i] = getRandomInt(100,num1[i]);
