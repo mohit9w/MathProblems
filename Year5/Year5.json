@@ -29,8 +29,8 @@
 			"addTo": "#navBtns"
 		},
 		{
-			"name": "Tricky Questions",
-			"clickFunc": "displayChoose('Trick');",
+			"name": "Word Problems",
+			"clickFunc": "displayChoose('wordproblems');",
 			"enabled": false,
 			"type": "Button",
 			"addTo": "#navBtns"
