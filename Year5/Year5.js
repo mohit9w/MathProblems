@@ -4,7 +4,7 @@ var chosenVal = 0;
 $(function() {
 	populateYear5NavItems();
 	hideConceptDiv();
-	debugger;
+	//debugger;
 });
 
 function populateYear5NavItems(){
@@ -119,7 +119,7 @@ function displayChoose(val){
 /**
  * This function returns the dropdown choose menu length.
  **/
-function (val){
+function getSelectionLength(val){
     if(val == "Division" || val == "Subtraction"){
         return fetchJSONObject(landingMenuLabel).divisionDisplay.length;
     } else if(val == "Addition"){
