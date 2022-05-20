@@ -3,15 +3,10 @@ var selectedOptions = 0;
 $(function () {
   'use strict'
   enableFormValidations();
-
-  $('#addedOptionDiv').on('DOMSubtreeModified', function(){
-    if(selectedOptions == 4){
-        $('#option').removeAttr('required');
-    } else {
-        $('#option').prop('required', true);
-    }
-  });
+  $('#txtoptiondiv').on('DOMSubtreeModified',function(){if(selectedOptions==4){getTxtOptionField().removeAttr('required');}else{getTxtOptionField().prop('required',true);}});
 });
+
+function getTxtOptionField(){return $('#txtoption');}
 function enableFormValidations(){
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
@@ -30,12 +25,12 @@ function enableFormValidations(){
     });
 }
 
-function saveOption(){
-    if(selectedOptions != 4 && $('#option').val().length > 0){
-        let option = $('#option').val();
+function saveTxtOption(){
+    if(selectedOptions != 4 && getTxtOptionField().val().length > 0){
+        let option = getTxtOptionField().val();
         selectedOptions++;
-        $('#addedOptionDiv').append("<button class=\"badge bg-primary text-wrap fw-light\" style=\"width: 6rem;\" id=\""+ option +"\" onClick=\"deleteOption('"+ option +"')\">" + option + "<br>click to remove</button>");
-        $('#option').val('');
+        $('#txtoptiondiv').append("<button class=\"badge bg-primary text-wrap fw-light\" style=\"width: 6rem;\" id=\""+ option +"\" onClick=\"deleteOption('"+ option +"')\">" + option + "<br>click to remove</button>");
+        getTxtOptionField().val('');
     }
 }
 function deleteOption(deleteme){
