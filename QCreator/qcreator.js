@@ -6,7 +6,9 @@ $(function () {
   $('#txtoptiondiv').on('DOMSubtreeModified',function(){if(selectedOptions==4){getTxtOptionField().removeAttr('required');}else{getTxtOptionField().prop('required',true);}});
 });
 
-function getTxtOptionField(){return $('#txtoption');}
+/*
+ * Global Functions
+ */
 function enableFormValidations(){
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
@@ -24,6 +26,12 @@ function enableFormValidations(){
       }, false)
     });
 }
+/**
+ * Getter Fields
+ */
+function getQuestion(){return $('#question')}
+function getQuestionImg(){return $('#questionImg')}
+function getTxtOptionField(){return $('#txtanswer')}
 
 function saveTxtOption(){
     if(selectedOptions != 4 && getTxtOptionField().val().length > 0){
