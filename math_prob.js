@@ -7,6 +7,8 @@ var time = 0;
 var running = 0;
 var _selectedYr;
 var _AllLoadedYrs = [];
+let devModeOn = false;
+let baseJsUrl = "https://cdn.jsdelivr.net/gh/mohit9w/MathProblems@main";
 
 function resetAll(){
 	$('#chooseSub').prop("className", "btn btn-outline-warning dropdown-toggle disabled");
@@ -19,7 +21,9 @@ function resetAll(){
 
 // Shorthand for $( document ).ready()
 $(function() {
-    //console.log( $('[data-bs-toggle="tooltip"]') );
+    checkDevMode();
+	//console.log( window.location.hostname );
+	
     addProjectEventListeners();
 	loadLandingMenuData();
 	enableAllTooltips();
@@ -31,6 +35,11 @@ $(function() {
         return JSON.parse(this.getItem(key))
     }
 });
+
+function checkDevMode(){
+	let host = window.location.hostname;
+	(host == "127.0.0.1" || host == "localhost")? devModeOn = true:devModeOn = false;
+}
 
 function loadLandingMenuData(){
 	$.getJSON(url, function (data) {
@@ -91,9 +100,9 @@ function loadSubjectMenu(){
 function loadYearAndSubject(subject){
 	$('#chooseSub').prop("innerHTML", subject);
 	//unloadLastYearFiles();
-	let filePath = "/" + _selectedYr + "/";
+	let filePath = (devModeOn ?  "" : baseJsUrl) + ("/" + _selectedYr + "/");
 	let htmlFile = _selectedYr + ".html";
-	let jsFile = _selectedYr + ".js";
+	let jsFile = devModeOn ? (_selectedYr + ".js") : (_selectedYr + "_min.js");
 	let jsonFile = _selectedYr + ".json";
 	//Load HTML
 	$.get(filePath + htmlFile, function(data, status){

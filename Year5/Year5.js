@@ -271,6 +271,7 @@ function getRandomInt(min, max) {
 
 function checkAns() {
     startPause();
+    disableAllYear5Questions();
     let correct = 0;
     for (i = 0; i < maxQ; i++) {
 		let result = getResult(i);
@@ -329,4 +330,10 @@ function showResult(res, resultText) {
 }
 function hideResult() {
     var x = $("#resultDiv").hide();
+}
+
+function disableAllYear5Questions(){
+    //let olObj = document.getElementById('questions');
+    //$("div *").disable();
+    $('#questions :input').attr('disabled', true);
 }
