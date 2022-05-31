@@ -29,6 +29,9 @@ function reload(){
 	//location.reload();
 	resetAllParams();
 }
+function getCheckAnswerButton(){
+    return $('#chkans');
+}
 function getDdMenu(){
 	return $('#ddMenu');
 }
@@ -63,8 +66,8 @@ function enableChooseMenu(val){
 }
 
 function clearDdMenu(){
-	$('#ddMenu').empty();
-	$('#choose').html("Choose Option:").addClass("btn btn-secondary dropdown-toggle disabled");
+	getDdMenu().empty();
+	getChooseMenu().html("Choose Option:").prop("className", "btn btn-secondary dropdown-toggle disabled");
 }
 
 function enableLoadQuestionsButton(){
@@ -72,11 +75,11 @@ function enableLoadQuestionsButton(){
 }
 
 function disableLoadQuestionsButton(){
-	getLoadQuestionsButton().prop("className", "btn btn-primary btn-sm disabled p-3 mt-2");
+	getLoadQuestionsButton().prop("className", "btn btn-secondary btn-sm disabled p-3 mt-2");
 }
 
 function disableChkAnsButton(){
-	$('#chkans').prop("className", "btn btn-secondary btn-sm disabled p-3 mt-2");
+	getCheckAnswerButton().prop("className", "btn btn-secondary btn-sm disabled p-3 mt-2");
 }
 
 function enableChkAnsButton(){
@@ -93,8 +96,8 @@ function resetAllParams(){
 	reset();
 	hideResult();
 	clearAllQuestions();
-	$('#lqst').addClass("btn btn-secondary btn-sm disabled p-3 mt-2");
-	$('#chkans').addClass("btn btn-secondary btn-sm disabled p-3 mt-2");
+	disableLoadQuestionsButton();
+	disableChkAnsButton();
 	$("#output").html("");
 }
 /**
@@ -329,7 +332,7 @@ function showResult(res, resultText) {
 	}
 }
 function hideResult() {
-    var x = $("#resultDiv").hide();
+    var x = getResultDiv().hide();
 }
 
 function disableAllYear5Questions(){
