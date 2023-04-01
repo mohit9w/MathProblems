@@ -142,15 +142,6 @@ function addProjectEventListeners(){
     document.addEventListener('beforeunload', clearStoredData());// Before closing clear all data.
 }
 /** Timer function methods Start*/
-function startPause() {
-    if (running == 0) {
-        running = 1;
-        increment();
-    } else {
-        running = 0;
-    }
-}
-
 function startTimer() {
 	var start = new Date();
 	remainingTime = duration;
@@ -163,7 +154,7 @@ function startTimer() {
   
 		if (seconds < 0) {
 		  alert('Time is up!');
-		  stopTimer();
+		  checkAns();
 		  return;
 		}
   
@@ -172,7 +163,7 @@ function startTimer() {
 		var minutes = Math.floor(seconds / 60);
 		seconds -= minutes * 60;
   
-		$('#timer').text(formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds));
+		$('#output').text(formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds));
 		remainingTime = seconds;
 	  }
 	}, 1000);
@@ -183,7 +174,7 @@ function reset() {
   	intervalId = 0;
   	remainingTime = null;
   	isPaused = false;
-  	$('#timer').text('00:00:00');
+  	$('#output').text('00:00:00');
 }
 
 function pauseTimer() {

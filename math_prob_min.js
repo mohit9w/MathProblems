@@ -13,10 +13,9 @@ function clearStoredData(){window.localStorage.clear();window.sessionStorage.cle
 function storeJSONObject(key,jsonToStore){window.localStorage.setJSON(key,jsonToStore);}
 function fetchJSONObject(key){return window.localStorage.getJSON(key);}
 function addProjectEventListeners(){document.addEventListener('beforeunload',clearStoredData());}
-function startPause(){if(running==0){running=1;increment();}else{running=0;}}
-function startTimer(){var start=new Date();remainingTime=duration;var end=new Date(start.getTime()+remainingTime*1000);intervalId=setInterval(function(){if(!isPaused){var now=new Date();var seconds=Math.round((end.getTime()-now.getTime())/1000);if(seconds<0){alert('Time is up!');stopTimer();return;}
-var hours=Math.floor(seconds/3600);seconds-=hours*3600;var minutes=Math.floor(seconds/60);seconds-=minutes*60;$('#timer').text(formatTime(hours)+':'+formatTime(minutes)+':'+formatTime(seconds));remainingTime=seconds;}},1000);}
-function reset(){clearInterval(intervalId);intervalId=0;remainingTime=null;isPaused=false;$('#timer').text('00:00:00');}
+function startTimer(){var start=new Date();remainingTime=duration;var end=new Date(start.getTime()+remainingTime*1000);intervalId=setInterval(function(){if(!isPaused){var now=new Date();var seconds=Math.round((end.getTime()-now.getTime())/1000);if(seconds<0){alert('Time is up!');checkAns();return;}
+var hours=Math.floor(seconds/3600);seconds-=hours*3600;var minutes=Math.floor(seconds/60);seconds-=minutes*60;$('#output').text(formatTime(hours)+':'+formatTime(minutes)+':'+formatTime(seconds));remainingTime=seconds;}},1000);}
+function reset(){clearInterval(intervalId);intervalId=0;remainingTime=null;isPaused=false;$('#output').text('00:00:00');}
 function pauseTimer(){isPaused=true;}
 function formatTime(time){if(time<10){return'0'+time;}else{return time;}}
 function executeFunction(_functionName){var fn=window[_functionName];if(typeof fn==="function"){fn();}}
