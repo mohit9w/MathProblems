@@ -14,8 +14,8 @@ function storeJSONObject(key,jsonToStore){window.localStorage.setJSON(key,jsonTo
 function fetchJSONObject(key){return window.localStorage.getJSON(key);}
 function addProjectEventListeners(){document.addEventListener('beforeunload',clearStoredData());}
 function startPause(){if(running==0){running=1;increment();}else{running=0;}}
-function startTimer(){intervalId=setInterval(function(){if(!isPaused){remainingTime=duration;intervalId=setInterval(function(){if(remainingTime<0){alert('Time is up!');checkAns();reset();return;}
-var hours=Math.floor(remainingTime/3600);remainingTime-=hours*3600;var minutes=Math.floor(remainingTime/60);remainingTime-=minutes*60;var seconds=remainingTime;$('#output').text(formatTime(hours)+':'+formatTime(minutes)+':'+formatTime(seconds));remainingTime--;},1000);}},1000);}
+function startTimer(){if(!isPaused){remainingTime=duration;intervalId=setInterval(function(){if(remainingTime<0){alert('Time is up!');checkAns();return;}
+var hours=Math.floor(remainingTime/3600);remainingTime-=hours*3600;var minutes=Math.floor(remainingTime/60);remainingTime-=minutes*60;var seconds=remainingTime;$('#output').text(formatTime(hours)+':'+formatTime(minutes)+':'+formatTime(seconds));remainingTime--;},1000);}}
 function reset(){clearInterval(intervalId);intervalId=0;remainingTime=null;isPaused=false;$('#output').text('00:00:00');}
 function pauseTimer(){isPaused=true;}
 function formatTime(time){if(time<10){return'0'+time;}else{return time;}}

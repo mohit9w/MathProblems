@@ -152,14 +152,12 @@ function startPause() {
 }
 
 function startTimer() {
-    intervalId = setInterval(function () {
         if (!isPaused) {
 			remainingTime = duration;
 			intervalId = setInterval(function () {
 				if (remainingTime < 0) {
 					alert('Time is up!');
 					checkAns();
-					reset();
 					return;
 				}
 		
@@ -173,7 +171,6 @@ function startTimer() {
 				remainingTime--;
 			}, 1000);
         }
-    }, 1000);
 }
 
 function reset() {
