@@ -159,6 +159,7 @@ function startTimer() {
 				if (remainingTime < 0) {
 					alert('Time is up!');
 					checkAns();
+					reset();
 					return;
 				}
 		
