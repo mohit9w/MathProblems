@@ -308,7 +308,7 @@ function checkAns() {
     } else if (correct == 0) {
         showResult(0, "YIKES! You Got 0%.");
     } else {
-        let result = (correct / maxQ) * 100;
+        let result = ((correct / maxQ) * 100).toFixed(2);
         showResult(result, "You Got " + result + "%.");
     }
 	disableChkAnsButton();

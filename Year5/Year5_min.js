@@ -33,7 +33,7 @@ for(i=0;i<maxQ;i++){let theId=i+1;let elem=document.createElement("li");let liTe
 startTimer();enableChkAnsButton();}
 function getRandomInt(min,max){return Math.floor(Math.random()*(max-min))+min;}
 function checkAns(){pauseTimer();disableAllYear5Questions();let correct=0;for(i=0;i<maxQ;i++){let result=getResult(i);debugger;var elementId=i+1;if($("#Q"+elementId).val().length!=0){let value=$("#Q"+elementId).val();if(parseFloat(value).toFixed(2)==parseFloat(result).toFixed(2)){$("#sp"+elementId).prop("innerHTML","&#x2714;");correct=correct+1;}else{$("#sp"+elementId).prop("innerHTML","&#x2716;");$("#correctAns"+elementId).prop("innerHTML","&nbsp;Correct Answer is: "+result);}}else{$("#sp"+elementId).prop("innerHTML","&#x2718;");$("#correctAns"+elementId).prop("innerHTML","<font color=\"red\">&nbsp;Correct Answer is: "+result+"</font>");}}
-if(correct==maxQ){showResult(100,"Huraaaaaaayyyy! You Got 100%.");}else if(correct==0){showResult(0,"YIKES! You Got 0%.");}else{let result=(correct/maxQ)*100;showResult(result,"You Got "+result+"%.");}
+if(correct==maxQ){showResult(100,"Huraaaaaaayyyy! You Got 100%.");}else if(correct==0){showResult(0,"YIKES! You Got 0%.");}else{let result=((correct/maxQ)*100).toFixed(2);showResult(result,"You Got "+result+"%.");}
 disableChkAnsButton();}
 function getResult(i){if(chosenVal==1){return(num1[i]+num2[i]);}else if(chosenVal==2){return(num1[i]-num2[i]);}else if(chosenVal==3){return(num1[i]*num2[i]);}else if(chosenVal==4){if((num1[i]%num2[i])==0){return(num1[i]/num2[i]);}else{return(num1[i]/num2[i]).toFixed(2);}}}
 function showResult(res,resultText){if(res==100){setResult("alert alert-success",resultText);}else if(res<50){setResult("alert alert-danger",resultText);}else{setResult("alert alert-info",resultText);}}
