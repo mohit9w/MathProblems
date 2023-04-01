@@ -159,7 +159,7 @@ function loadAdditionParams(chosenVal, arrVal){
 			num1[i] = getRandomInt(100,999);
 			num2[i] = getRandomInt(100,999);
 		}
-		duration = maxQ*5*1000;
+		duration = maxQ * 5;
 	}
 	reset();
 	getChooseMenu().prop("innerHTML", "Add : " + fetchJSONObject(landingMenuLabel).commonDisplay[arrVal]);
@@ -198,7 +198,7 @@ function loadSubtractionParams(chosenVal, arrVal){
 			num1[i] = getRandomInt(100,999);
 			num2[i] = getRandomInt(100,num1[i]);
 		}
-		duration = maxQ*15*1000;
+		duration = maxQ * 15;
 	}
 	getChooseMenu().prop("innerHTML", "Subtract : " + fetchJSONObject(landingMenuLabel).divisionDisplay[arrVal]);
 	enableLoadQuestionsButton();
@@ -218,33 +218,33 @@ function loadDivisionParams(chosenVal, arrVal){
 			//1 Digit By 1 Digit
 			num1[i] = getRandomInt(1,9);
 			num2[i] = getRandomInt(1,num1[i]);
-			duration = maxQ*2*1000;
+			duration = maxQ * 2;
 			//getRandomInt(1,num1[i]);
 		} else if(arrVal == 1){
 			//2 Digit By 1 Digit
 			num1[i] = getRandomInt(10,99);
 			num2[i] = getRandomInt(1,9);
-			duration = maxQ*2*1000;
+			duration = maxQ * 2;
 		} else if(arrVal == 2){
 			//2 Digit By 2 Digit
 			num1[i] = getRandomInt(10,99);
 			num2[i] = getRandomInt(10,num1[i]);
-			duration = maxQ*5*1000;
+			duration = maxQ * 5;
 		}  else if(arrVal == 3){
             //3 Digit By 1 Digit
             num1[i] = getRandomInt(100,999);
             num2[i] = getRandomInt(1,9);
-			duration = maxQ*7*1000;
+			duration = maxQ * 7;
         } else if(arrVal == 4){
 			//3 Digit By 2 Digit
 			num1[i] = getRandomInt(100,999);
 			num2[i] = getRandomInt(10,99);
-			duration = maxQ*10*1000;
+			duration = maxQ * 10;
 		} else if(arrVal == 5){
 			//3 Digit By 3 Digit
 			num1[i] = getRandomInt(100,999);
 			num2[i] = getRandomInt(100,num1[i]);
-			duration = maxQ*15*1000;
+			duration = maxQ * 15;
 		}
 	}
 	getChooseMenu().prop("innerHTML", "Divide : " + fetchJSONObject(landingMenuLabel).divisionDisplay[arrVal]);
