@@ -1,4 +1,4 @@
-let url="MenuItems.json";let landingMenuLabel="landingMenu";var maxQ=10;var num1=Array(maxQ).fill(0);var num2=Array(maxQ).fill(0);var time=0;var running=0;var _selectedYr;var _AllLoadedYrs=[];let devModeOn=false;let baseJsUrl="https://cdn.jsdelivr.net/gh/mohit9w/MathProblems@main";function resetAll(){$('#chooseSub').prop("className","btn btn-outline-warning dropdown-toggle disabled");$('#chooseSub').html("Choose Subject:");$('#subMenu').empty();$('#yearData').empty();$('#navBtns').empty();$('#navigationMenu').hide();}
+let url="MenuItems.json";let landingMenuLabel="landingMenu";var maxQ=30;var num1=Array(maxQ).fill(0);var num2=Array(maxQ).fill(0);var intervalId;var duration=null;var remainingTime=null;var isPaused=false;var _selectedYr;var _AllLoadedYrs=[];let devModeOn=false;let baseJsUrl="https://cdn.jsdelivr.net/gh/mohit9w/MathProblems@main";function resetAll(){$('#chooseSub').prop("className","btn btn-outline-warning dropdown-toggle disabled");$('#chooseSub').html("Choose Subject:");$('#subMenu').empty();$('#yearData').empty();$('#navBtns').empty();$('#navigationMenu').hide();}
 $(function(){checkDevMode();addProjectEventListeners();loadLandingMenuData();enableAllTooltips();$('#navigationMenu').hide();Storage.prototype.setJSON=function(key,obj){return this.setItem(key,JSON.stringify(obj))}
 Storage.prototype.getJSON=function(key){return JSON.parse(this.getItem(key))}});function checkDevMode(){let host=window.location.hostname;(host=="127.0.0.1"||host=="localhost")?devModeOn=true:devModeOn=false;}
 function loadLandingMenuData(){$.getJSON(url,function(data){storeJSONObject(landingMenuLabel,data);loadChooseYrMenu();});}
@@ -14,8 +14,9 @@ function storeJSONObject(key,jsonToStore){window.localStorage.setJSON(key,jsonTo
 function fetchJSONObject(key){return window.localStorage.getJSON(key);}
 function addProjectEventListeners(){document.addEventListener('beforeunload',clearStoredData());}
 function startPause(){if(running==0){running=1;increment();}else{running=0;}}
-function reset(){running=0;time=0;$("#output").html("00:00:00");}
-function increment(){if(running==1){setTimeout(function(){time++;var mins=Math.floor(time/10/60);var secs=Math.floor(time/10%60);var tenths=time%10;if(mins<10){mins="0"+mins;}
-if(secs<10){secs="0"+secs;}
-$("#output").prop("innerHTML","<i class=\"fa fa-clock-o\"></i> "+mins+":"+secs+":"+"0"+tenths);increment();},100);}}
+function startTimer(){intervalId=setInterval(function(){if(!isPaused){remainingTime=duration;intervalId=setInterval(function(){if(remainingTime<0){alert('Time is up!');checkAns();return;}
+var hours=Math.floor(remainingTime/3600);remainingTime-=hours*3600;var minutes=Math.floor(remainingTime/60);remainingTime-=minutes*60;var seconds=remainingTime;$('#output').text(formatTime(hours)+':'+formatTime(minutes)+':'+formatTime(seconds));remainingTime--;},1000);}},1000);}
+function reset(){clearInterval(intervalId);intervalId=0;remainingTime=null;isPaused=false;$('#output').text('00:00:00');}
+function pauseTimer(){isPaused=true;}
+function formatTime(time){if(time<10){return'0'+time;}else{return time;}}
 function executeFunction(_functionName){var fn=window[_functionName];if(typeof fn==="function"){fn();}}

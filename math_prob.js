@@ -1,6 +1,6 @@
 let url = "MenuItems.json";
 let landingMenuLabel = "landingMenu";
-var maxQ = 10;
+var maxQ = 30;
 var num1 = Array(maxQ).fill(0);
 var num2 = Array(maxQ).fill(0);
 var intervalId;
